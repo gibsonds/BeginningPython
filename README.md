@@ -121,35 +121,45 @@ polygon(3)
 back(60)
 polygon(4)
 polygon(20)
-  
-FROM TRINKET
 
-  import numpy
-import matplotlib.pyplot
 
-# Load data
-data = numpy.loadtxt(fname='inflammation-01.csv', delimiter=',')
-# Make Figure
-fig = matplotlib.pyplot.figure(figsize=(5.0, 7.0))
+import turtle 
+turtle.color("green")
 
-# Create subplots in 3 rows and 1 column
-axes1 = fig.add_subplot(3, 1, 1)
-axes2 = fig.add_subplot(3, 1, 2)
-axes3 = fig.add_subplot(3, 1, 3)
 
-# Plot and label the average, max, and min of the data
-axes1.set_ylabel('average')
-axes1.plot(data.mean(axis=0))
+def back(space):
+  turtle.penup()
+  turtle.backward(space)
+  #turtle.forward(space)
+  #turtle.down()
+  turtle.pendown()
 
-axes2.set_ylabel('max')
-axes2.plot(data.max(axis=0))
+def polygon(sides,size):
+  #draw a closed shape with however many sides you want
+  myPolygonSideCount = sides
+  myDrawnLines = 0
+ # myLineLength = 360/myPolygonSideCount
+  myLineLength = size
+  myAngleSize = 360/myPolygonSideCount
+  for i in range(sides):
+    turtle.forward(myLineLength)
+    turtle.left(myAngleSize)
+    
+def spiral(SideLength,Angle):
+  mySpiralSideLengthStart = SideLength
+  myAngleStart = Angle
+  myAngleSize = myAngleStart
+  myLineLength = mySpiralSideLengthStart
+  for i in range(mySpiralSideLengthStart):
+    turtle.forward(myLineLength)
+    turtle.left(myAngleSize)
+    myLineLength -= 1
+    myAngleSize += 1
 
-axes3.set_ylabel('min')
-axes3.plot(data.min(axis=0))
-
-fig.tight_layout()
-
-matplotlib.pyplot.savefig("plot.png")
-
-# Code adapted from Software Carpentry. Check out the full lesson here:
-# http://swcarpentry.github.io/python-novice-inflammation/01-numpy.html
+spiral(90,320)
+    
+#polygon(3,270)
+#back(60)
+#polygon(4,90)
+#back(10)
+#polygon(20,5)
